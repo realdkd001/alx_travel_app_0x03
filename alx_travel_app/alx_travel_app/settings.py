@@ -34,6 +34,14 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
+CHAPA_SECRET_KEY = os.getenv("CHAPA_SECRET_KEY")
+CHAPA_BASE_URL = os.getenv("CHAPA_BASE_URL", "https://api.chapa.co/v1")
+CHAPA_CALLBACK_URL = os.getenv("CHAPA_CALLBACK_URL")
+CHAPA_CURRENCY = os.getenv("CHAPA_CURRENCY", "ETB")
+
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "dkdzrekey001@gmail.com")
+
 
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
@@ -41,6 +49,11 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 ALLOWED_HOSTS = []
 
 CELERY_BROKER_URL = 'amqp://localhost'  # RabbitMQ default
+CELERY_RESULT_BACKEND = "rpc://"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+
 
 # Application definition
 
